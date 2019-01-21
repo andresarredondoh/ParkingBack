@@ -1,5 +1,7 @@
 package com.ceiba.demo.model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -11,11 +13,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "registro" )
 @Access(AccessType.FIELD)
-public class Registro {
+public class Registro implements Serializable {
+	
+	private static final long serialVersionUID = -2501488190681855867L;
+
+	public Registro() {
+		
+	}
+	
+	
  
+	public Registro(Long id, String tipoVehiculo, String placa, Integer cilindraje, LocalDateTime ingreso, Date salida,
+			Double pago, boolean estado) {
+		super();
+		this.id = id;
+		this.tipoVehiculo = tipoVehiculo;
+		this.placa = placa;
+		this.cilindraje = cilindraje;
+		this.fechaIngreso = ingreso;
+		this.salida = salida;
+		this.pago = pago;
+		this.estado = estado;
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable= false)
@@ -31,7 +57,7 @@ public class Registro {
     private Integer cilindraje;
 	
 	@Column(name ="ingreso", nullable=false, length = 255)
-    private Date ingreso;
+    private LocalDateTime fechaIngreso;
 	
 	@Column(name ="salida", length = 30)
     private Date salida;
@@ -56,14 +82,6 @@ public class Registro {
 
 	public void setCilindraje(Integer cilindraje) {
 		this.cilindraje = cilindraje;
-	}
-
-	public Date getIngreso() {
-		return ingreso;
-	}
-
-	public void setIngreso(Date ingreso) {
-		this.ingreso = ingreso;
 	}
 
 	public Date getSalida() {
@@ -104,6 +122,18 @@ public class Registro {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+
+
+	public LocalDateTime getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+
+
+	public void setFechaIngreso(LocalDateTime fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 
